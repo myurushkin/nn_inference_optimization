@@ -1,0 +1,4 @@
+experiments_count: 10
+defaults:
+  - gpu: gtx1070
+  - nn: yolov5x

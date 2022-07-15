@@ -1,3 +1,6 @@
-torch
+pandas
 ptflops
 numpy
+hydra-core
+pillow
+requests
