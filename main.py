@@ -27,22 +27,19 @@ def measure(model, input):
 
 @hydra.main(version_base=None, config_path="conf", config_name="config")
 def my_app(cfg : DictConfig) -> None:
-    print(cfg)
     with torch.cuda.device(0):
-
         if cfg.nn.name == 'simple_network':
             net = NeuralNetwork()
             input_tensor_shape = (1, 100)
             input = np.zeros(input_tensor_shape, dtype=np.float32)
         if cfg.nn.name == 'yolov5x':
             net = torch.hub.load('ultralytics/yolov5', 'yolov5x', pretrained=True)
-            print(net)
             input_tensor_shape = (3, 640, 480)
             input = np.expand_dims(np.zeros(input_tensor_shape, dtype=np.float32), 0)
 
 
         macs, params = get_model_complexity_info(net, input_tensor_shape, as_strings=False,
-                                                 print_per_layer_stat=True, verbose=True)
+                                                 print_per_layer_stat=False, verbose=True)
 
         input = torch.tensor(input)
 
